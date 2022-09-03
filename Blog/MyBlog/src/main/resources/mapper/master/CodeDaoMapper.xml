@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.blog.my.core.dao.master.CodeDaoMapper">
+    <select id="SelectInfo" resultType="com.site.blog.my.core.entity.SaveVideoInfo" parameterType="com.site.blog.my.core.entity.SearchInfoEntity">
+        select
+            id,img,download,language,contentZH as content, titleZH as title,detailZH as detail
+        from
+            save_video_info
+        where
+        contentZH is  not  null
+        <if test="SearchInfo!=''">
+            and titleZH like CONCAT('%',#{SearchInfo},'%')
+        </if>
+        LIMIT 8 OFFSET ${page}
+    </select>
+
+    <select id="getCount" resultType="java.lang.Integer" parameterType="com.site.blog.my.core.entity.SearchInfoEntity">
+        select
+               count(1)
+        from
+             save_video_info
+        where
+              contentZH is  not  null
+        <if test="SearchInfo!=''">
+            and titleZH like CONCAT('%',#{SearchInfo},'%')
+        </if>
+    </select>
+</mapper>
