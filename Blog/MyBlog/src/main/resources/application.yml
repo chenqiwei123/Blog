@@ -1,0 +1,51 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: 100MB
+    max-http-form-post-size: 100MB
+  port: 8080
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+      enabled: true
+
+
+spring:
+  mvc:
+    view:
+      prefix: /templates
+      suffix: .html
+#  resources:
+#    static-locations: classpath:templates/
+  servlet:
+    multipart:
+      max-file-size: 800MB
+      max-request-size: 800MB
+
+file-manager:
+  thumbnail:
+    width: 80 # 缩略图宽
+  volumes:
+    - Node:
+      source: fileSystem # 暂时只支持本地文件系统
+      alias: files # 目录别名
+      path: /opt/deploy/upload/Document/ # 映射目录
+#      path: /D:/BaiduNetdiskDownload # 映射目录
+      isDefault: true # 是否默认打开
+      locale:
+      constraint:
+        locked: false # 文件夹是否锁定
+        readable: true # 是否可读
+        writable: false # 是否可写
+
+
+
+
+
+
+
+
+
+
+
