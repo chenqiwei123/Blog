@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -33,7 +34,7 @@ public class SecondDataSourceConfig {
 
     @Value("${second.datasource.b.driverClassName}")
     private String driverClass;
-
+    @Primary
     @Bean(name = "secondDataSource")
     public DataSource clusterDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
@@ -43,12 +44,12 @@ public class SecondDataSourceConfig {
         dataSource.setPassword(password);
         return dataSource;
     }
-
+    @Primary
     @Bean(name = "secondTransactionManager")
     public DataSourceTransactionManager clusterTransactionManager() {
         return new DataSourceTransactionManager(clusterDataSource());
     }
-
+    @Primary
     @Bean(name = "secondSqlSessionFactory")
     public SqlSessionFactory clusterSqlSessionFactory(@Qualifier("secondDataSource") DataSource clusterDataSource)
             throws Exception {

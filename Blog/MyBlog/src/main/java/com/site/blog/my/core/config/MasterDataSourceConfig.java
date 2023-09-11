@@ -36,7 +36,7 @@ public class MasterDataSourceConfig {
     private String driverClass;
 
     @Bean(name = "masterDataSource")
-    @Primary
+
     public DataSource masterDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(driverClass);
@@ -47,13 +47,13 @@ public class MasterDataSourceConfig {
     }
 
     @Bean(name = "masterTransactionManager")
-    @Primary
+
     public DataSourceTransactionManager masterTransactionManager() {
         return new DataSourceTransactionManager(masterDataSource());
     }
 
     @Bean(name = "masterSqlSessionFactory")
-    @Primary
+
     public SqlSessionFactory masterSqlSessionFactory(@Qualifier("masterDataSource") DataSource masterDataSource)
             throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
