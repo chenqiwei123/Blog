@@ -7,4 +7,5 @@ public class Beauty {
     private StringBuilder content;
     private String url;
     private String title;
+    private String tagId;
 }
